@@ -1,0 +1,43 @@
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+          bundler: 'latest'
+      - name: Install Shopify CLI
+        run: npm install -g @shopify/cli @shopify/theme
+      - name: Select Store
+        id: select-store
+        uses: actions/github-script@v6
+        with:
+          result-encoding: string
+          script: |
+            return 'sp-home-test'
+      - name: Select Token
+        id: select-token
+        uses: actions/github-script@v6
+        with:
+          result-encoding: string
+          script: |
+            return 'shptka_5a287548322834b94b68e577aaf85239'
+      - name: Update the live theme
+        id: update-theme
+        env:
+          SHOPIFY_FLAG_STORE: ${{ steps.select-store.outputs.result }}
+          SHOPIFY_CLI_THEME_TOKEN: ${{ steps.select-token.outputs.result }}
+          SHOPIFY_FLAG_PATH: './theme'
+        run: shopify theme push --live
+name: 'Production'
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'theme/**'
