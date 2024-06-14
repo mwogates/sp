@@ -1,0 +1,14 @@
+{
+  "name": "sp",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "env-cmd -r shopify.presets.json -e development shopify theme dev",
+    "pull": "env-cmd -r shopify.presets.json -e development shopify theme pull",
+    "pull:prod": "env-cmd -r shopify.presets.json -e production shopify theme pull",
+    "push": "env-cmd -r shopify.presets.json -e development shopify theme push",
+    "push:prod": "env-cmd -r shopify.presets.json -e production shopify theme push"
+  },
+  "dependencies": {
+    "env-cmd": "10.1.0"
+  }
+}
