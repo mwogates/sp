@@ -45,7 +45,7 @@ jobs:
           SHOPIFY_FLAG_PATH: './theme'
           SHOPIFY_FLAG_THEME_ID: ${{ steps.branch-name.outputs.current_branch }}
         if: steps.check-theme-existence.outputs.THEME_COUNT == 0
-        run: shopify theme push -u
+        run: echo "PREVIEW_URL=$(shopify theme push -u --json | jq '.theme.preview_url')" >> $GITHUB_OUTPUT
       - name: Update the existing theme
         id: update-theme
         env:
@@ -55,6 +55,27 @@ jobs:
           SHOPIFY_FLAG_THEME_ID: ${{ steps.branch-name.outputs.current_branch }}
         if: steps.check-theme-existence.outputs.THEME_COUNT > 0
         run: shopify theme push
+      - name: Parse Theme URL
+        id: parse-theme
+        if: steps.check-theme-existence.outputs.THEME_COUNT == 0
+        uses: actions/github-script@v6
+        with:
+          result-encoding: string
+          script: return ${{ steps.create-theme.outputs.PREVIEW_URL }}
+      - name: Comment on PR (Preview Link)
+        if: steps.check-theme-existence.outputs.THEME_COUNT == 0
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          comment_tag: preview
+          message: |
+            🟢 Preview Theme: ${{ steps.parse-theme.outputs.result }}
+      - name: Comment on PR (Failure)
+        if: ${{ failure() }}
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          comment_tag: preview
+          message: |
+            🔴 Deployment Failed
 name: 'Preview'
 on:
   pull_request:
