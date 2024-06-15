@@ -33,7 +33,7 @@ jobs:
           SHOPIFY_FLAG_STORE: ${{ steps.select-store.outputs.result }}
           SHOPIFY_CLI_THEME_TOKEN: ${{ steps.select-token.outputs.result }}
           SHOPIFY_FLAG_PATH: './theme'
-        run: shopify theme push --live
+        run: shopify theme push --verbose --allow-live --live
 name: 'Production'
 on:
   push:
