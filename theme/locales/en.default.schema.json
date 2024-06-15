@@ -2036,6 +2036,14 @@
         "description": {
           "name": "Description"
         },
+        "product_extra_info": {
+          "name": "Product Extra Info",
+          "settings": {
+            "text": {
+              "label": "Text"
+            }
+          }
+        },
         "sku": {
           "name": "SKU",
           "settings": {
