@@ -97,3 +97,7 @@
 .collection__view-all a:not(.link) {
   margin-top: 1rem;
 }
+
+.collection .grid__item .product-card-wrapper {
+  border: 1px solid red;
+}
