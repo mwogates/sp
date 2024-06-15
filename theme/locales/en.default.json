@@ -164,6 +164,8 @@
         "sale_price": "Sale price",
         "unit_price": "Unit price"
       },
+      "read_more": "Read More",
+      "read_less": "Read Less",
       "share": "Share this product",
       "sold_out": "Sold out",
       "unavailable": "Unavailable",

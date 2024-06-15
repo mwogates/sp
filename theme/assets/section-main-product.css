@@ -1477,3 +1477,21 @@ a.product__text {
     border: none;
   }
 }
+
+.product__extra-info-content {
+  max-height: 14rem;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.product__extra-info-content.expanded {
+  max-height: 120rem;
+}
+
+.product__extra-info-toggle {
+  margin-top: 1rem;
+}
+
+.product__extra-info-toggle:after {
+  --border-opacity: var(--buttons-border-opacity);
+}

@@ -32,6 +32,13 @@
     }
   {%- endstyle -%}
 
+  <script>
+    window.translations = {
+      readMore: "{{ 'products.product.read_more' | t }}",
+      readLess: "{{ 'products.product.read_less' | t }}"
+    };
+  </script>
+
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
   {%- if product.quantity_price_breaks_configured? -%}
@@ -193,7 +200,10 @@
               {%- when 'product_extra_info' -%}
                 {%- if block.settings.text != blank -%}
                   <div class="product__extra-info rte quick-add-hidden" {{ block.shopify_attributes }}>
-                    {{ block.settings.text }}
+                    <div class="product__extra-info-content" id="product-extra-info-content">
+                      {{ block.settings.text }}
+                    </div>
+                    <button class="product__extra-info-toggle button button--tertiary" id="product-extra-info-toggle">{{ 'products.product.read_more' | t }}</button>
                   </div>
                 {%- endif -%}
               {%- when 'sku' -%}
