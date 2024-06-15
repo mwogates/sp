@@ -105,3 +105,18 @@ if (!customElements.get('product-info')) {
     }
   );
 }
+
+// Toggle Product Extra Info
+document.addEventListener('DOMContentLoaded', function() {
+  let toggleButton = document.getElementById('product-extra-info-toggle');
+  let content = document.getElementById('product-extra-info-content');
+
+  toggleButton.addEventListener('click', function() {
+    content.classList.toggle('expanded');
+    if (content.classList.contains('expanded')) {
+      toggleButton.textContent = window.translations.readLess;
+    } else {
+      toggleButton.textContent = window.translations.readMore;
+    }
+  });
+});
