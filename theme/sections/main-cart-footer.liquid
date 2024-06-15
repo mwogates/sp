@@ -78,6 +78,17 @@
             {%- else -%}
               <div class="cart__ctas" {{ block.shopify_attributes }}>
                 <button
+                  type="button"
+                  id="clear-cart"
+                  class="cart__checkout-button button"
+                  name="clear-cart"
+                  {% if cart == empty %}
+                    disabled
+                  {% endif %}
+                >
+                  {{ 'sections.cart.clear' | t }}
+                </button>
+                <button
                   type="submit"
                   id="checkout"
                   class="cart__checkout-button button"
