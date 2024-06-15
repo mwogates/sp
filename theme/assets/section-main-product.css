@@ -279,6 +279,10 @@ a.product__text {
   display: none;
 }
 
+.product .price-item {
+  color: red;
+}
+
 @media screen and (min-width: 750px) {
   .product__info-container {
     max-width: 60rem;
