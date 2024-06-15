@@ -223,4 +223,8 @@ cart-items {
     display: flex;
     gap: 1rem;
   }
+
+  .cart__ctas > * + * {
+    margin-top: 0;
+  }
 }
